@@ -1,5 +1,6 @@
 package com.vinpin.adapter.wrapper;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.vinpin.adapter.base.ViewHolder;
  */
 public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int ITEM_TYPE_LOAD_MORE = Integer.MAX_VALUE - 2;
+    private static final int ITEM_TYPE_LOAD_MORE = Integer.MAX_VALUE - 2;
 
     private RecyclerView.Adapter mInnerAdapter;
     private View mLoadMoreView;
@@ -53,8 +54,9 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mInnerAdapter.getItemViewType(position);
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_LOAD_MORE) {
             ViewHolder holder;
             if (mLoadMoreView != null) {
@@ -69,7 +71,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (isShowLoadMore(position)) {
             if (mOnLoadMoreListener != null) {
                 mOnLoadMoreListener.onLoadMoreRequested();
@@ -80,7 +82,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         WrapperUtils.onAttachedToRecyclerView(mInnerAdapter, recyclerView, new WrapperUtils.SpanSizeCallback() {
             @Override
             public int getSpanSize(GridLayoutManager layoutManager, GridLayoutManager.SpanSizeLookup oldLookup, int position) {
@@ -97,7 +99,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
         mInnerAdapter.onViewAttachedToWindow(holder);
         if (isShowLoadMore(holder.getLayoutPosition())) {
             WrapperUtils.setFullSpan(holder);

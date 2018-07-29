@@ -1,5 +1,6 @@
 package com.vinpin.adapter.wrapper;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.vinpin.adapter.base.ViewHolder;
  */
 public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int ITEM_TYPE_EMPTY = Integer.MAX_VALUE - 1;
+    private static final int ITEM_TYPE_EMPTY = Integer.MAX_VALUE - 1;
 
     private RecyclerView.Adapter mInnerAdapter;
     private View mEmptyView;
@@ -29,8 +30,9 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return (mEmptyView != null || mEmptyLayoutId != 0) && mInnerAdapter.getItemCount() == 0;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (isEmpty()) {
             ViewHolder holder;
             if (mEmptyView != null) {
@@ -44,7 +46,7 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         WrapperUtils.onAttachedToRecyclerView(mInnerAdapter, recyclerView, new WrapperUtils.SpanSizeCallback() {
             @Override
             public int getSpanSize(GridLayoutManager gridLayoutManager, GridLayoutManager.SpanSizeLookup oldLookup, int position) {
@@ -61,7 +63,7 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
         mInnerAdapter.onViewAttachedToWindow(holder);
         if (isEmpty()) {
             WrapperUtils.setFullSpan(holder);
@@ -78,7 +80,7 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (isEmpty()) {
             return;
         }
