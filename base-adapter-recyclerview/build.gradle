@@ -15,15 +15,15 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    implementation "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 
 publish {
     userOrg = 'vinpin'
     groupId = 'com.vinpin'
     artifactId = 'baseadapter'
-    publishVersion = '1.0.1'
+    publishVersion = '2.0.0'
     desc = 'The universal recyclerview adapter, simplifying the code.'
     website = 'https://github.com/VinPin/baseAdapter'
 }

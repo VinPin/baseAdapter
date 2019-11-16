@@ -1,6 +1,6 @@
 package com.vinpin.adapter.base;
 
-import android.support.v4.util.SparseArrayCompat;
+import androidx.collection.SparseArrayCompat;
 
 /**
  * 条目管理类
