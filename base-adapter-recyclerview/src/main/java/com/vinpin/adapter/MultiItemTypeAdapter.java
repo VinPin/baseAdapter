@@ -24,6 +24,9 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected Context mContext;
     protected List<T> mDatas;
 
+    public static final int MIN_CLICK_DELAY_TIME = 1000;
+    public static boolean forbidFrequentlyClick = true;
+
     private ItemViewDelegateManager<T> mItemViewDelegateManager;
     private OnItemClickListener mOnItemClickListener;
 
@@ -62,11 +65,23 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     private void setListener(final ViewGroup parent, final ViewHolder viewHolder, int viewType) {
         viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
+
+            private long lastClickTime = 0;
+
             @Override
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
-                    int position = viewHolder.getAdapterPosition();
-                    mOnItemClickListener.onItemClick(v, viewHolder, position);
+                    long currentTime = System.currentTimeMillis();
+                    if (forbidFrequentlyClick) {
+                        if (Math.abs(currentTime - lastClickTime) > MIN_CLICK_DELAY_TIME) {
+                            lastClickTime = currentTime;
+                            int position = viewHolder.getAdapterPosition();
+                            mOnItemClickListener.onItemClick(v, viewHolder, position);
+                        }
+                    } else {
+                        int position = viewHolder.getAdapterPosition();
+                        mOnItemClickListener.onItemClick(v, viewHolder, position);
+                    }
                 }
             }
         });
