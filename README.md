@@ -5,7 +5,7 @@ Android 封装的RecyclerView的适配器，支持多种type，添加头部尾�
 Gradle
 ```
 // 支持androidx
-compile 'com.vinpin:baseadapter:2.0.0'
+compile 'com.vinpin:baseadapter:2.0.2'
 // 不支持androidx
 compile 'com.vinpin:baseadapter:1.0.1'
 ``` 
