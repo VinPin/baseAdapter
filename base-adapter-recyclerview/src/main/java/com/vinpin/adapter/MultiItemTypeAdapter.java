@@ -24,8 +24,8 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected Context mContext;
     protected List<T> mDatas;
 
-    public static final int MIN_CLICK_DELAY_TIME = 1000;
-    public static boolean forbidFrequentlyClick = true;
+    public int MIN_CLICK_DELAY_TIME = 1000;
+    public boolean forbidFrequentlyClick = true;
 
     private ItemViewDelegateManager<T> mItemViewDelegateManager;
     private OnItemClickListener mOnItemClickListener;
