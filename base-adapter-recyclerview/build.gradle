@@ -23,7 +23,7 @@ publish {
     userOrg = 'vinpin'
     groupId = 'com.vinpin'
     artifactId = 'baseadapter'
-    publishVersion = '2.0.1'
+    publishVersion = '2.0.2'
     desc = 'The universal recyclerview adapter, simplifying the code.'
     website = 'https://github.com/VinPin/baseAdapter'
 }
