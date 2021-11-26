@@ -2,6 +2,8 @@ package com.vinpin.adapter;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.vinpin.adapter.base.ItemViewDelegate;
 import com.vinpin.adapter.base.ViewHolder;
 
@@ -35,8 +37,18 @@ public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T> {
             public void convert(ViewHolder holder, T t, int position) {
                 CommonAdapter.this.convert(holder, t, position);
             }
+
+            @Override
+            public void convertPayloads(ViewHolder holder, T t, int position, @NonNull List<Object> payloads) {
+                super.convertPayloads(holder, t, position, payloads);
+                CommonAdapter.this.convertPayloads(holder, t, position, payloads);
+            }
         });
     }
 
     protected abstract void convert(ViewHolder holder, T t, int position);
+
+    public void convertPayloads(@NonNull ViewHolder holder, T t, int position, @NonNull List<Object> payloads) {
+        convert(holder, t, position);
+    }
 }

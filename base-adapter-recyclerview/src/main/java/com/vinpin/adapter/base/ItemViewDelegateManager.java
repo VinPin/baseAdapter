@@ -1,6 +1,9 @@
 package com.vinpin.adapter.base;
 
+import androidx.annotation.NonNull;
 import androidx.collection.SparseArrayCompat;
+
+import java.util.List;
 
 /**
  * 条目管理类
@@ -77,9 +80,9 @@ public class ItemViewDelegateManager<T> {
                 "No ItemViewDelegate added that matches position=" + position + " in data source");
     }
 
-    public void convert(ViewHolder holder, T item, int position) {
+    public void convert(@NonNull ViewHolder holder, T item, int position) {
         int delegatesCount = delegates.size();
-        for (int i = 0; i < delegatesCount; i++) {
+        for (int i = delegatesCount - 1; i >= 0; i--) {
             ItemViewDelegate<T> delegate = delegates.valueAt(i);
             if (delegate.isForViewType(item, position)) {
                 delegate.convert(holder, item, position);
@@ -87,6 +90,19 @@ public class ItemViewDelegateManager<T> {
             }
         }
         throw new IllegalArgumentException(
-                "No ItemViewDelegateManager added that matches position=" + position + " in data source");
+                "No ItemViewDelegate added that matches position=" + position + " in data source");
+    }
+
+    public void convertPayloads(@NonNull ViewHolder holder, T item, int position, @NonNull List<Object> payloads) {
+        int delegatesCount = delegates.size();
+        for (int i = delegatesCount - 1; i >= 0; i--) {
+            ItemViewDelegate<T> delegate = delegates.valueAt(i);
+            if (delegate.isForViewType(item, position)) {
+                delegate.convertPayloads(holder, item, position, payloads);
+                return;
+            }
+        }
+        throw new IllegalArgumentException(
+                "No ItemViewDelegate added that matches position=" + position + " in data source");
     }
 }

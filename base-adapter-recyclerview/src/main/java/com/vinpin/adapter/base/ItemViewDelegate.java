@@ -1,16 +1,24 @@
 package com.vinpin.adapter.base;
 
+import androidx.annotation.NonNull;
+
+import java.util.List;
+
 /**
- * 条目的代表接口
+ * 条目的代表
  *
  * @author zwp
- *         create at 2018/01/23 13:14
+ * create at 2018/01/23 13:14
  */
-public interface ItemViewDelegate<T> {
+public abstract class ItemViewDelegate<T> {
 
-    int getItemViewLayoutId();
+    public abstract int getItemViewLayoutId();
 
-    boolean isForViewType(T item, int position);
+    public abstract boolean isForViewType(T item, int position);
 
-    void convert(ViewHolder holder, T t, int position);
+    public abstract void convert(ViewHolder holder, T t, int position);
+
+    public void convertPayloads(ViewHolder holder, T t, int position, @NonNull List<Object> payloads) {
+        convert(holder, t, position);
+    }
 }

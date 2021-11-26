@@ -120,6 +120,16 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         mItemViewDelegateManager.convert(holder, item, position);
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position);
+        } else {
+            T item = mDatas.get(position);
+            mItemViewDelegateManager.convertPayloads(holder, item, position, payloads);
+        }
+    }
+
     public List<T> getDatas() {
         return mDatas;
     }
