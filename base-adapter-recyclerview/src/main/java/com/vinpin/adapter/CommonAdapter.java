@@ -11,16 +11,15 @@ import java.util.List;
  * 单种Item布局的Adapter，简化代码
  *
  * @author zwp
- *         create at 2018/01/23 13:14
+ * create at 2018/01/23 13:14
  */
 public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T> {
 
-    private int mLayoutId;
+    private final int mLayoutId;
 
     public CommonAdapter(final Context context, int layoutId, List<T> datas) {
         super(context, datas);
         mLayoutId = layoutId;
-
         addItemViewDelegate(new ItemViewDelegate<T>() {
             @Override
             public int getItemViewLayoutId() {
@@ -40,5 +39,4 @@ public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T> {
     }
 
     protected abstract void convert(ViewHolder holder, T t, int position);
-
 }

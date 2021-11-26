@@ -14,17 +14,17 @@ import com.vinpin.adapter.base.ViewHolder;
  * 通过类似装饰者模式，去设计一个类，增强原有Adapter的功能，使其支持addHeaderView和addFooterView。
  *
  * @author zwp
- *         create at 2018/01/23 13:14
+ * create at 2018/01/23 13:14
  */
 public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int BASE_ITEM_TYPE_HEADER = 100000;
     private static final int BASE_ITEM_TYPE_FOOTER = 200000;
 
-    private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
-    private SparseArrayCompat<View> mFootViews = new SparseArrayCompat<>();
+    private final SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
+    private final SparseArrayCompat<View> mFootViews = new SparseArrayCompat<>();
 
-    private RecyclerView.Adapter mInnerAdapter;
+    private final RecyclerView.Adapter mInnerAdapter;
 
     public HeaderAndFooterWrapper(RecyclerView.Adapter adapter) {
         mInnerAdapter = adapter;

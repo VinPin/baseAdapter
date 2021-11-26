@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
  * 装饰工具类
  *
  * @author zwp
- *         create at 2018/01/23 13:14
+ * create at 2018/01/23 13:14
  */
 public class WrapperUtils {
 

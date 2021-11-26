@@ -6,11 +6,11 @@ import androidx.collection.SparseArrayCompat;
  * 条目管理类
  *
  * @author zwp
- *         create at 2018/01/23 13:14
+ * create at 2018/01/23 13:14
  */
 public class ItemViewDelegateManager<T> {
 
-    private SparseArrayCompat<ItemViewDelegate<T>> delegates = new SparseArrayCompat<>();
+    private final SparseArrayCompat<ItemViewDelegate<T>> delegates = new SparseArrayCompat<>();
 
     public int getItemViewDelegateCount() {
         return delegates.size();
@@ -57,6 +57,14 @@ public class ItemViewDelegateManager<T> {
         return this;
     }
 
+    public ItemViewDelegate<T> getItemViewDelegate(int viewType) {
+        return delegates.get(viewType);
+    }
+
+    public int getItemViewType(ItemViewDelegate<T> itemViewDelegate) {
+        return delegates.indexOfValue(itemViewDelegate);
+    }
+
     public int getItemViewType(T item, int position) {
         int delegatesCount = delegates.size();
         for (int i = delegatesCount - 1; i >= 0; i--) {
@@ -80,13 +88,5 @@ public class ItemViewDelegateManager<T> {
         }
         throw new IllegalArgumentException(
                 "No ItemViewDelegateManager added that matches position=" + position + " in data source");
-    }
-
-    public ItemViewDelegate getItemViewDelegate(int viewType) {
-        return delegates.get(viewType);
-    }
-
-    public int getItemViewType(ItemViewDelegate<T> itemViewDelegate) {
-        return delegates.indexOfValue(itemViewDelegate);
     }
 }

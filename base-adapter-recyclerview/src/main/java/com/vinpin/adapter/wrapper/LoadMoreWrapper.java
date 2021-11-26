@@ -13,13 +13,13 @@ import com.vinpin.adapter.base.ViewHolder;
  * 通过类似装饰者模式，去设计一个类，增强原有Adapter的功能，使其支持添加LoadMore。
  *
  * @author zwp
- *         create at 2018/01/23 13:14
+ * create at 2018/01/23 13:14
  */
 public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int ITEM_TYPE_LOAD_MORE = Integer.MAX_VALUE - 2;
 
-    private RecyclerView.Adapter mInnerAdapter;
+    private final RecyclerView.Adapter mInnerAdapter;
     private View mLoadMoreView;
     private int mLoadMoreLayoutId;
 
