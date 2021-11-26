@@ -1,11 +1,11 @@
 buildscript {
-
     repositories {
         google()
+        maven { url "https://www.jitpack.io" }
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:3.5.4'
         classpath 'com.novoda:bintray-release:0.9.1'
     }
 }
@@ -13,9 +13,9 @@ buildscript {
 allprojects {
     repositories {
         google()
+        maven { url "https://www.jitpack.io" }
         jcenter()
     }
-
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet') //忽略javadoc错误
         options {
