@@ -53,9 +53,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return mConvertView;
     }
 
+    public <T extends View> T getView(int viewId) {
+        return getView(viewId,true);
+    }
+
     @SuppressWarnings("unchecked")
     @Nullable
-    public <T extends View> T getView(int viewId) {
+    public <T extends View> T getView(int viewId, boolean printStackTrace) {
         View view = mViews.get(viewId);
         if (view == null) {
             view = mConvertView.findViewById(viewId);
@@ -64,7 +68,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         try {
             return (T) view;
         } catch (Exception e) {
-            e.printStackTrace();
+            if (printStackTrace) e.printStackTrace();
             return null;
         }
     }
