@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vinpin.adapter.base.ViewHolder;
 
+import java.util.List;
+
 /**
  * 通过类似装饰者模式，去设计一个类，增强原有Adapter的功能，使其支持添加LoadMore。
  *
@@ -79,6 +81,18 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
         } else {
             mInnerAdapter.onBindViewHolder(holder, position);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (isShowLoadMore(position)) {
+            if (mOnLoadMoreListener != null) {
+                mOnLoadMoreListener.onLoadMoreRequested();
+            }
+        } else {
+            mInnerAdapter.onBindViewHolder(holder, position, payloads);
         }
     }
 

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vinpin.adapter.base.ViewHolder;
 
+import java.util.List;
+
 /**
  * 通过类似装饰者模式，去设计一个类，增强原有Adapter的功能，使其支持添加EmptyView。
  *
@@ -29,6 +31,40 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private boolean isEmpty() {
         return (mEmptyView != null || mEmptyLayoutId != 0) && mInnerAdapter.getItemCount() == 0;
+    }
+
+    @Override
+    public int getItemCount() {
+        if (isEmpty()) {
+            return 1;
+        }
+        return mInnerAdapter.getItemCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (isEmpty()) {
+            return ITEM_TYPE_EMPTY;
+        }
+        return mInnerAdapter.getItemViewType(position);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (isEmpty()) {
+            return;
+        }
+        mInnerAdapter.onBindViewHolder(holder, position);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (isEmpty()) {
+            return;
+        }
+        mInnerAdapter.onBindViewHolder(holder, position, payloads);
     }
 
     @NonNull
@@ -69,31 +105,6 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (isEmpty()) {
             WrapperUtils.setFullSpan(holder);
         }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (isEmpty()) {
-            return ITEM_TYPE_EMPTY;
-        }
-        return mInnerAdapter.getItemViewType(position);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (isEmpty()) {
-            return;
-        }
-        mInnerAdapter.onBindViewHolder(holder, position);
-    }
-
-    @Override
-    public int getItemCount() {
-        if (isEmpty()) {
-            return 1;
-        }
-        return mInnerAdapter.getItemCount();
     }
 
     public void setEmptyView(View emptyView) {

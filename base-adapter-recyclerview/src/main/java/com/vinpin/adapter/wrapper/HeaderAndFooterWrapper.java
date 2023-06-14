@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vinpin.adapter.base.ViewHolder;
 
+import java.util.List;
+
 /**
  * 通过类似装饰者模式，去设计一个类，增强原有Adapter的功能，使其支持addHeaderView和addFooterView。
  *
@@ -66,6 +68,18 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
             return;
         }
         mInnerAdapter.onBindViewHolder(holder, position - getHeadersCount());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (isHeaderViewPos(position)) {
+            return;
+        }
+        if (isFooterViewPos(position)) {
+            return;
+        }
+        mInnerAdapter.onBindViewHolder(holder, position - getHeadersCount(), payloads);
     }
 
     @Override
