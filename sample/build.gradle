@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'com.vinpin.sample'
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.vinpin.sample"
@@ -19,8 +19,9 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 }
 
