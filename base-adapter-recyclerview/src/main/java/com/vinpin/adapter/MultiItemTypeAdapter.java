@@ -1,6 +1,7 @@
 package com.vinpin.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -111,12 +112,13 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        T item = mDatas.get(position);
         View itemView = holder.getConvertView();
         itemView.setTag(R.id.view_tag_base_adapter_holder, holder);
         itemView.setTag(R.id.view_tag_base_adapter_position, position);
+        itemView.setTag(R.id.view_tag_base_adapter_item, item);
         itemView.setOnClickListener(mViewClickListener);
         itemView.setOnLongClickListener(mViewLongClickListener);
-        T item = mDatas.get(position);
         mItemViewDelegateManager.convert(holder, item, position);
     }
 
@@ -128,6 +130,22 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
             T item = mDatas.get(position);
             mItemViewDelegateManager.convertPayloads(holder, item, position, payloads);
         }
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+        super.onViewRecycled(holder);
+        View itemView = holder.getConvertView();
+        try {
+            int position = (int) itemView.getTag(R.id.view_tag_base_adapter_position);
+            T item = (T) itemView.getTag(R.id.view_tag_base_adapter_item);
+            mItemViewDelegateManager.convertViewRecycled(holder, item, position);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        itemView.setTag(R.id.view_tag_base_adapter_holder, null);
+        itemView.setTag(R.id.view_tag_base_adapter_position, null);
+        itemView.setTag(R.id.view_tag_base_adapter_item, null);
     }
 
     public List<T> getDatas() {

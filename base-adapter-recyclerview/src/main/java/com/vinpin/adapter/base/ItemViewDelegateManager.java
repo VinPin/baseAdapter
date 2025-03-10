@@ -105,4 +105,15 @@ public class ItemViewDelegateManager<T> {
         throw new IllegalArgumentException(
                 "No ItemViewDelegate added that matches position=" + position + " in data source");
     }
+
+    public void convertViewRecycled(@NonNull ViewHolder holder, T item, int position) {
+        int delegatesCount = delegates.size();
+        for (int i = delegatesCount - 1; i >= 0; i--) {
+            ItemViewDelegate<T> delegate = delegates.valueAt(i);
+            if (delegate.isForViewType(item, position)) {
+                delegate.convertViewRecycled(holder);
+                return;
+            }
+        }
+    }
 }

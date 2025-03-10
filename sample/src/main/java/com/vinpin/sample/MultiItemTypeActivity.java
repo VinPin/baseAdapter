@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * 多条目列表界面
  *
  * @author zwp
- *         create at 2018/01/24 9:44
+ * create at 2018/01/24 9:44
  */
 public class MultiItemTypeActivity extends Activity {
 
@@ -60,7 +61,7 @@ public class MultiItemTypeActivity extends Activity {
         if (!mInfos.isEmpty()) {
             mInfos.clear();
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             MultiItemTypeInfo info = new MultiItemTypeInfo();
             info.content = i % 2 == 0 ? "你说啥？？？" : "Android 封装的RecyclerView的适配器，支持多种type，添加头部尾部，空布局，点击事件等，简化adapter的使用。";
             info.type = i % 2 == 0 ? 0 : 1;

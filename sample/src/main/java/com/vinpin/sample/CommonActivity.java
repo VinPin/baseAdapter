@@ -58,7 +58,7 @@ public class CommonActivity extends Activity {
         if (!mInfos.isEmpty()) {
             mInfos.clear();
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             mInfos.add(i + "、Android 封装的RecyclerView的适配器，支持多种type，添加头部尾部，空布局，点击事件等，简化adapter的使用。");
         }
         setRecyclerViewData(mInfos);

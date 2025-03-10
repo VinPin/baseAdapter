@@ -21,4 +21,8 @@ public abstract class ItemViewDelegate<T> {
     public void convertPayloads(ViewHolder holder, T t, int position, @NonNull List<Object> payloads) {
         convert(holder, t, position);
     }
+
+    public void convertViewRecycled(ViewHolder holder) {
+        // do nothings.
+    }
 }

@@ -2,4 +2,5 @@
 <resources>
     <item name="view_tag_base_adapter_holder" type="id" />
     <item name="view_tag_base_adapter_position" type="id" />
+    <item name="view_tag_base_adapter_item" type="id" />
 </resources>
