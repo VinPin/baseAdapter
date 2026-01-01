@@ -1,1 +1,2 @@
-include ':sample', ':base-adapter-recyclerview'
+rootProject.name = "BaseAdapter"
+include ':app', ':baseadapter'
