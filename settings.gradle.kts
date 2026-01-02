@@ -1,2 +1,2 @@
 rootProject.name = "BaseAdapter"
-include ':app', ':baseadapter'
+include(":app", ":baseadapter")
